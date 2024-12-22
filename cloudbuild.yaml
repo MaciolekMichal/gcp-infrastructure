@@ -1,0 +1,15 @@
+steps:
+- name: 'hashicorp/terraform:latest'
+  args: ['init']
+  dir: 'iac'
+
+- name: 'hashicorp/terraform:latest'
+  args: ['plan', '-var-file=test.tfvars', '-out=tfplan']
+  dir: 'iac'
+
+- name: 'hashicorp/terraform:latest'
+  args: ['apply', '-auto-approve', 'tfplan']
+  dir: 'iac'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
